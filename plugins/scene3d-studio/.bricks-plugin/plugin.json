@@ -1,0 +1,12 @@
+{
+  "name": "scene3d-studio",
+  "displayName": "Scene3D Studio",
+  "version": "0.1.0",
+  "description": "Model in Blender, export glTF, compose scenes in the Scene3D brick, script interactions, and ship 3D demos or mini-games to devices.",
+  "author": { "name": "BRICKS", "url": "https://bricks.tools" },
+  "homepage": "https://github.com/mybigday/bricks-ctor-agent-skills",
+  "repository": "https://github.com/mybigday/bricks-ctor-agent-skills",
+  "license": "MIT",
+  "keywords": ["3d", "blender", "gltf", "scene3d", "game", "showcase", "demo"],
+  "mcpServers": "./.mcp.json"
+}

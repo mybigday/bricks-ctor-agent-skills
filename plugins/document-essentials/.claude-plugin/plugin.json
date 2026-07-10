@@ -1,0 +1,11 @@
+{
+  "name": "document-essentials",
+  "displayName": "Document Essentials",
+  "version": "0.1.0",
+  "description": "Parse PDF, Excel, and PowerPoint files and import their content into your app — Data entries, properties, slideshows, and media assets.",
+  "author": { "name": "BRICKS", "url": "https://bricks.tools" },
+  "homepage": "https://github.com/mybigday/bricks-ctor-agent-skills",
+  "repository": "https://github.com/mybigday/bricks-ctor-agent-skills",
+  "license": "MIT",
+  "keywords": ["pdf", "excel", "xlsx", "csv", "powerpoint", "pptx", "import", "data"]
+}

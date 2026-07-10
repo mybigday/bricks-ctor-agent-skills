@@ -1,0 +1,11 @@
+{
+  "name": "ai-toolkit",
+  "displayName": "AI Features Toolkit",
+  "version": "0.1.0",
+  "description": "Choose the right AI generator and model for each device, then wire voice, RAG, and generative-media features with proven patterns.",
+  "author": { "name": "BRICKS", "url": "https://bricks.tools" },
+  "homepage": "https://github.com/mybigday/bricks-ctor-agent-skills",
+  "repository": "https://github.com/mybigday/bricks-ctor-agent-skills",
+  "license": "MIT",
+  "keywords": ["llm", "gguf", "whisper", "tts", "rag", "vector-store", "on-device", "offline"]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "bricks-ctor-agent-skills",
+  "owner": { "name": "BRICKS", "email": "support@bricks.tools" },
+  "description": "Official CTOR plugins from the BRICKS team — document import workflows, AI feature guidance, and 3D content pipelines.",
+  "plugins": [
+    {
+      "name": "document-essentials",
+      "source": "./plugins/document-essentials",
+      "displayName": "Document Essentials",
+      "description": "Parse PDF, Excel, and PowerPoint files and import their content into your app — Data entries, properties, slideshows, and media assets.",
+      "version": "0.1.0",
+      "category": "productivity"
+    },
+    {
+      "name": "ai-toolkit",
+      "source": "./plugins/ai-toolkit",
+      "displayName": "AI Features Toolkit",
+      "description": "Choose the right AI generator and model for each device, then wire voice, RAG, and generative-media features with proven patterns.",
+      "version": "0.1.0",
+      "category": "ai"
+    },
+    {
+      "name": "scene3d-studio",
+      "source": "./plugins/scene3d-studio",
+      "displayName": "Scene3D Studio",
+      "description": "Model in Blender, export glTF, compose scenes in the Scene3D brick, script interactions, and ship 3D demos or mini-games to devices.",
+      "version": "0.1.0",
+      "category": "3d"
+    }
+  ]
+}
