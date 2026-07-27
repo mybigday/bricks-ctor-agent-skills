@@ -53,7 +53,11 @@ In order, cheapest first:
    the #1 cause of "it's so slow").
 3. Smaller quant (Q4 → Q3) — quality check afterwards.
 4. Smaller model (1.5B → 0.5B) — usually better than deep quant cuts.
-5. Move inference off-device: LAN llama.cpp/ollama server via `openaiLlm`.
+5. Move inference off-device: Buttress remote inference first — the `llm` /
+   `mlxLlm` / `speechInference` generators offload to a workspace-bound GPU
+   server with the generator config unchanged and a `use-local` fallback
+   (setup in the built-in `bricks-ctor` skill's `references/buttress.md`) —
+   or a LAN llama.cpp/ollama server via `openaiLlm`.
 6. Cloud model — accept the offline consequence explicitly with the user.
 
 ## STT / TTS / embedding models

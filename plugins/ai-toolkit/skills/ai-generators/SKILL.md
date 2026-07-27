@@ -69,11 +69,20 @@ A LAN-hosted OpenAI-compatible server (ollama / llama.cpp server via
 `openaiLlm` with a custom base URL) is the middle path: local-network privacy
 and no per-token cost, with bigger models than the device could run.
 
+**Buttress (BRICKS remote inference)** is the other middle path: the `llm`
+(GGML), `mlxLlm`, and `speechInference` generators can offload transparently
+to a workspace-bound GPU server on the LAN — same generator, same events, and
+a `use-local` fallback that keeps the offline story intact when the server is
+unreachable. Prefer it over the `openaiLlm` route when the app should keep its
+on-device pipeline shape. Setup (server install, workspace binding, the
+`buttressConnectionSettings` property) is covered by the built-in `bricks-ctor`
+skill's `references/buttress.md` — read that before wiring Buttress.
+
 ## Hard platform limits to check early
 
 - `llm` (GGML) wants **>8 GB device RAM** — most signage boxes fail this;
-  use small models on NPU paths (`neuropilotLlm`/`qnnLlm`), `onnxLlm`, or a
-  LAN server instead.
+  use small models on NPU paths (`neuropilotLlm`/`qnnLlm`), `onnxLlm`,
+  Buttress offload, or a LAN server instead.
 - **TTS (GGML) does not work on web** (no vocoder) — use `tts` (ONNX) there.
 - **Web preview runs single-threaded** — treat it as a functional check, not
   a performance test.

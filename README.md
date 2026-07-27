@@ -12,16 +12,18 @@ a [Claude Code plugin marketplace](https://code.claude.com/docs) for teams that 
 ## Document Essentials
 
 Bring your business files into your app. The agent parses **PDF menus and price lists**,
-**Excel/CSV sheets**, and **PowerPoint decks** on your machine, then imports the content as Data
-entries, Property Bank values, slideshow media, or searchable knowledge for RAG.
+**Word documents**, **Excel/CSV sheets**, and **PowerPoint decks** on your machine, then imports
+the content as Data entries, Property Bank values, slideshow media, or searchable knowledge for
+RAG.
 
 | Skill | What it does |
 |---|---|
 | `pdf` | Extract text from PDFs and route it into app content; wire runtime PDF ingestion |
+| `docx` | Extract headings, lists, tables, and images from Word documents and import them as app data |
 | `xlsx` | Parse spreadsheets (.xlsx/.csv/.tsv) into structured rows and import them as app data |
 | `pptx` | Extract slide text, notes, and images; rebuild decks as signage slideshows |
 
-All parse scripts run locally. The spreadsheet and deck parsers are self-contained (no
+All parse scripts run locally. The Word, spreadsheet, and deck parsers are self-contained (no
 dependencies); the PDF parser runs the version-pinned `officeparser` CLI via bunx (cached
 after first use).
 
@@ -30,7 +32,8 @@ after first use).
 Everything the agent should know before adding AI to a BRICKS app. Pick the right generator
 (local llama.cpp / MLX / NeuroPilot / Qualcomm QNN / ONNX / Apple Intelligence, or cloud
 Anthropic/OpenAI-compatible) for the feature and the target device, size models against real
-hardware limits, and wire complete patterns — with offline behavior spelled out for every recipe.
+hardware limits (including Buttress LAN offload when devices are weak), and wire complete
+patterns — with offline behavior spelled out for every recipe.
 
 | Skill | What it does |
 |---|---|

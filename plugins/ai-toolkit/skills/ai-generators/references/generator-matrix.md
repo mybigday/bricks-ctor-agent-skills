@@ -8,8 +8,8 @@ Verify against the generator's property panel when wiring — properties evolve.
 
 | Generator | Runs | Platforms / requirements | Notes |
 |---|---|---|---|
-| `llm` | local, GGML/llama.cpp, any GGUF | iOS/tvOS (Metal, M1+/A17+ recommended), Android 13+ (CPU; OpenCL only on Adreno 700+; Hexagon NPU on Snapdragon 8 Gen 1+), Linux/Windows (choose `vulkan` or `cuda` in Accel Variant; Hexagon NPU on Dragonwing IQ9+ Linux), macOS (Metal on arm64, CPU-only on x86_64), Web (CPU/WebGPU, single-thread preview) | **Device RAM must exceed 8 GB.** The default local choice when hardware allows |
-| `mlxLlm` | local, Apple MLX | iOS/tvOS 17+ (Apple Silicon-optimized) | Supports **LLM and VLM** (vision); models from HuggingFace Hub |
+| `llm` | local, GGML/llama.cpp, any GGUF | iOS/tvOS (Metal, M1+/A17+ recommended), Android 13+ (CPU; OpenCL only on Adreno 700+; Hexagon NPU on Snapdragon 8 Gen 1+), Linux/Windows (choose `vulkan` or `cuda` in Accel Variant; Hexagon NPU on Dragonwing IQ9+ Linux), macOS (Metal on arm64, CPU-only on x86_64), Web (CPU/WebGPU, single-thread preview) | **Device RAM must exceed 8 GB.** The default local choice when hardware allows; Buttress-offloadable |
+| `mlxLlm` | local, Apple MLX | iOS/tvOS 17+ (Apple Silicon-optimized) | Supports **LLM and VLM** (vision); models from HuggingFace Hub; Buttress-offloadable |
 | `neuropilotLlm` | local, MediaTek NeuroPilot SDK | Android on MediaTek Genio (e.g. 720/520) | Preloadable model-bundle presets; NPU-accelerated small models |
 | `qnnLlm` | local, Qualcomm AI Engine (QNN) | Android on Qualcomm silicon | Optional load-on-init; NPU-accelerated |
 | `onnxLlm` | local, transformers.js/ONNX Runtime | All platforms incl. web (coreml/qnn/nnapi/dnnl/dml/xnnpack/webgpu/cpu per platform) | Any converted model on HuggingFace; good below the 8 GB GGML floor |
@@ -17,11 +17,17 @@ Verify against the generator's property panel when wiring — properties evolve.
 | `anthropicLlm` | cloud | any | Anthropic-compatible API endpoints |
 | `openaiLlm` | cloud or LAN | any | OpenAI-compatible endpoints — includes self-hosted ollama / llama.cpp server on the local network |
 
+**Buttress-offloadable** = the generator can delegate inference transparently
+to a workspace-bound Buttress GPU server on the LAN via its
+`buttressConnectionSettings` property (`use-local` fallback keeps offline
+behavior). Server install, workspace binding, and the property reference live
+in the built-in `bricks-ctor` skill's `references/buttress.md`.
+
 ## Speech-to-text
 
 | Generator | Runs | Platforms | Notes |
 |---|---|---|---|
-| `speechInference` | local, Whisper GGML (whisper.cpp) | iOS/tvOS (Metal + CoreML), Android (CPU), Desktop (Vulkan/CUDA/Metal), Web (CPU/WebGPU) | Default STT; models from `huggingface.co/BricksDisplay/whisper-ggml`; iOS GPU accel recommends M1+/A17+ |
+| `speechInference` | local, Whisper GGML (whisper.cpp) | iOS/tvOS (Metal + CoreML), Android (CPU), Desktop (Vulkan/CUDA/Metal), Web (CPU/WebGPU) | Default STT; models from `huggingface.co/BricksDisplay/whisper-ggml`; iOS GPU accel recommends M1+/A17+; Buttress-offloadable |
 | `realtimeTranscription` | local pipeline | wherever its STT + VAD generators run | Continuous live transcription: references an STT (GGML) generator + a VAD generator; tune slice duration / min duration / process intervals |
 | `platformStt` | native platform recognition | per platform | Zero-download, locale property; platform accuracy/limits apply |
 | `appleStt` | native Apple recognition | iOS 26+, macOS 26+ — **not tvOS** | Newer Apple recognition stack |

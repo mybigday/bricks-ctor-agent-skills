@@ -1,6 +1,6 @@
 ---
 name: pdf
-description: Use when the user brings a PDF into their BRICKS project and wants its content in the app — menus, price lists, schedules, catalogs, brochures, reports, or scanned documents. Extracts text on the design machine with a bundled script, routes the results into Data entries, Property Bank values, data-calculation sources, or media assets, and covers converting pages to images for slideshows. Also covers wiring runtime PDF ingestion (vectorStore RAG, parseDocument in data calculations) for apps that accept documents while running — note that mobile/TV launchers cannot parse PDF at runtime (web/desktop only). Triggers on "import this PDF", "read the menu from this PDF", "use this catalog", or any .pdf path in the prompt. Do NOT use for creating or exporting PDF files, or for spreadsheets and slide decks (use the xlsx / pptx skills).
+description: Use when the user brings a PDF into their BRICKS project and wants its content in the app — menus, price lists, schedules, catalogs, brochures, reports, or scanned documents. Extracts text on the design machine with a bundled script, routes the results into Data entries, Property Bank values, data-calculation sources, or media assets, and covers converting pages to images for slideshows. Also covers wiring runtime PDF ingestion (vectorStore RAG, parseDocument in data calculations) for apps that accept documents while running — note that mobile/TV launchers cannot parse PDF at runtime (web/desktop only). Triggers on "import this PDF", "read the menu from this PDF", "use this catalog", or any .pdf path in the prompt. Do NOT use for creating or exporting PDF files, or for Word docs, spreadsheets, and slide decks (use the docx / xlsx / pptx skills).
 license: MIT
 metadata:
   version: 0.1.0
@@ -112,5 +112,6 @@ key. Never wholesale-delete entries unless asked.
 ## When Not To Use
 
 - The deliverable is a PDF file (creating/exporting) — out of scope.
-- The file is a spreadsheet or slide deck — use the `xlsx` / `pptx` skills.
+- The file is a Word document, spreadsheet, or slide deck — use the `docx` /
+  `xlsx` / `pptx` skills.
 - The user pasted the text already — just use it directly.

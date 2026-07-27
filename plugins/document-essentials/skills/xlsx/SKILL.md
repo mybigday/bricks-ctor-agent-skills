@@ -1,6 +1,6 @@
 ---
 name: xlsx
-description: Use when the user brings a spreadsheet (.xlsx, .csv, .tsv) into their BRICKS project and wants its data in the app — product lists, price tables, schedules, bookings, inventory, KPI sheets. Parses sheets into structured, typed rows on the design machine with a bundled zero-dependency script, shapes them, and imports as Data entries, Property Bank values, or data-calculation sources; large tables can also feed the vectorStore for semantic search. Covers re-import when the sheet changes and runtime ingestion for apps that accept uploaded sheets. Triggers on "import this Excel", "use this spreadsheet", "load the price list", or a spreadsheet path in the prompt. Do NOT use to create or edit spreadsheet files as the deliverable, and not for PDFs or slide decks (use the pdf / pptx skills).
+description: Use when the user brings a spreadsheet (.xlsx, .csv, .tsv) into their BRICKS project and wants its data in the app — product lists, price tables, schedules, bookings, inventory, KPI sheets. Parses sheets into structured, typed rows on the design machine with a bundled zero-dependency script, shapes them, and imports as Data entries, Property Bank values, or data-calculation sources; large tables can also feed the vectorStore for semantic search. Covers re-import when the sheet changes and runtime ingestion for apps that accept uploaded sheets. Triggers on "import this Excel", "use this spreadsheet", "load the price list", or a spreadsheet path in the prompt. Do NOT use to create or edit spreadsheet files as the deliverable, and not for PDFs, Word docs, or slide decks (use the pdf / docx / pptx skills).
 license: MIT
 metadata:
   version: 0.1.0
@@ -112,5 +112,6 @@ dataBank generator) over runtime file parsing.
 ## When Not To Use
 
 - The deliverable is a spreadsheet file (creating/editing .xlsx) — out of scope.
-- The file is a PDF or a slide deck — use the `pdf` / `pptx` skills.
+- The file is a PDF, Word document, or slide deck — use the `pdf` / `docx` /
+  `pptx` skills.
 - Tiny one-off values (a single number) — just set the property directly.

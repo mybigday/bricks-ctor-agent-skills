@@ -51,6 +51,6 @@ recipe."
 
 - Choosing generators or models — `ai-generators` / `ai-model-selection`.
 - Importing the documents that feed RAG — the `document-essentials` plugin's
-  `pdf`/`xlsx`/`pptx` skills handle file → content; this skill consumes their
-  output.
+  `pdf`/`docx`/`xlsx`/`pptx` skills handle file → content; this skill consumes
+  their output.
 - The CTOR editor's own chat — app settings.

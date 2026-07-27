@@ -25,6 +25,7 @@ variants are faster and more accurate when the language is known.
 | Desktop / >8 GB RAM devices | 3B–8B @ Q4–Q5 | Llama 3 8B class (upper bound of the NeuroPilot bundle tiers; comfortable on desktop GPUs) |
 | Web preview | smallest only | Functional checks; single-threaded — never judge speed here |
 | LAN server (`openaiLlm` → ollama / llama.cpp server) | anything the server fits | Middle path: bigger models, local-network privacy, no per-token cost |
+| Buttress server (`llm` / `mlxLlm` / `speechInference` offload) | anything the server fits | Transparent offload: generator config + events unchanged, `use-local` fallback; setup in the built-in `bricks-ctor` skill's `references/buttress.md` |
 
 ## Quantization ladder
 

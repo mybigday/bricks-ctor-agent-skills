@@ -1,6 +1,6 @@
 ---
 name: pptx
-description: Use when the user brings a presentation (.pptx) into their BRICKS project — company decks, menus designed as slides, event programs — and wants it on screen. Extracts per-slide text, titles, speaker notes, and embedded images on the design machine with a bundled zero-dependency script; then builds or updates the app — a Slideshow brick playlist, re-authored native layouts, or media-box assets. Covers slide-to-signage conversion (aspect ratio and safe areas, per-slide duration, loop behavior) and re-import when the deck changes. Triggers on "turn this deck into signage", "import these slides", "use this presentation", or a .pptx path in the prompt. Do NOT use to author new .pptx files as the deliverable, and not for PDFs or spreadsheets (use the pdf / xlsx skills).
+description: Use when the user brings a presentation (.pptx) into their BRICKS project — company decks, menus designed as slides, event programs — and wants it on screen. Extracts per-slide text, titles, speaker notes, and embedded images on the design machine with a bundled zero-dependency script; then builds or updates the app — a Slideshow brick playlist, re-authored native layouts, or media-box assets. Covers slide-to-signage conversion (aspect ratio and safe areas, per-slide duration, loop behavior) and re-import when the deck changes. Triggers on "turn this deck into signage", "import these slides", "use this presentation", or a .pptx path in the prompt. Do NOT use to author new .pptx files as the deliverable, and not for PDFs, Word docs, or spreadsheets (use the pdf / docx / xlsx skills).
 license: MIT
 metadata:
   version: 0.1.0
@@ -82,7 +82,8 @@ block text), report changes, and update only the affected slides/media. Keep
 ## When Not To Use
 
 - The deliverable is a .pptx file (creating/editing presentations) — out of scope.
-- The file is a PDF or spreadsheet — use the `pdf` / `xlsx` skills.
+- The file is a PDF, Word document, or spreadsheet — use the `pdf` / `docx` /
+  `xlsx` skills.
 - The user wants a data-driven display that happens to look like slides —
   build it natively from the start (Items/Slideshow with app data), no import
   needed.

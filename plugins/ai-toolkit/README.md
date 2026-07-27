@@ -24,3 +24,6 @@ Try prompts like:
   chat model (that's app settings).
 - Offline-first: BRICKS launchers must keep working without network, so every recipe states what
   happens offline.
+- Weak devices aren't a dead end: the GGML/MLX LLM and Whisper STT generators can offload to a
+  workspace-bound **Buttress** GPU server on the LAN. The skills point at the built-in
+  `bricks-ctor` skill's `references/buttress.md` for server setup and connection settings.

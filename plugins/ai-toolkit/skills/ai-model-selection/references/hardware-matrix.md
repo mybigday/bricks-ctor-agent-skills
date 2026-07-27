@@ -6,7 +6,10 @@ desktop backend.
 
 ## LLM (GGML / llama.cpp)
 
-Hard requirement: **device RAM > 8 GB** for the `llm` generator.
+Hard requirement: **device RAM > 8 GB** for the `llm` generator. Devices
+below it can still ship LLM features via Buttress remote inference (`llm` /
+`mlxLlm` / `speechInference` offload to a workspace-bound GPU server — setup
+in the built-in `bricks-ctor` skill's `references/buttress.md`).
 
 | Platform | Acceleration | Notes |
 |---|---|---|
@@ -54,7 +57,7 @@ Same acceleration pattern as LLM; same RAM caution.
 
 | Device RAM | On-device LLM budget |
 |---|---|
-| < 4 GB | none (NPU vendor bundles / tiny ONNX / LAN server) |
+| < 4 GB | none (NPU vendor bundles / tiny ONNX / Buttress offload / LAN server) |
 | 4–8 GB | 0.5B–2B @ Q4 (prefer NPU generators on supported silicon) |
 | 8–12 GB | 1B–4B @ Q4–Q5 comfortable (the `llm` generator's supported floor is >8 GB) |
 | 16 GB+ / dGPU | 7–8B @ Q4–Q6 |
