@@ -2,8 +2,13 @@
 
 Official plugins for the [CTOR](https://bricks.tools) desktop agent, maintained by the BRICKS team.
 
-Install from **Plugins → Add marketplace → `mybigday/bricks-ctor-agent-skills`**, then pick the
-skills you want — every skill is opt-in at install time.
+**Built into CTOR starting with v2.25** — this marketplace ships with the app: it appears at the
+bottom of the **Plugins** panel with a "Built-in" badge and refreshes automatically, so new plugins
+and updates show up without re-adding anything. Open a plugin and pick the skills you want — every
+skill is opt-in at install time.
+
+On CTOR versions before v2.25, add it manually from
+**Plugins → Add marketplace → `mybigday/bricks-ctor-agent-skills`**.
 
 The repo ships both manifest flavors (`.bricks-plugin/` and `.claude-plugin/`), so it also works as
 a [Claude Code plugin marketplace](https://code.claude.com/docs) for teams that use both tools:
@@ -61,7 +66,8 @@ disabled unless you approve its exact command at install time.
 
 ## Compatibility & trust
 
-- Requires a CTOR desktop version with the plugin system.
+- Built into CTOR desktop from v2.25; earlier versions with the plugin system can add it manually
+  (see above).
 - Skills run with your configured model; no extra accounts are required.
 - Every script ships readable in this repo — nothing is downloaded at install time beyond the
   plugin content itself.
