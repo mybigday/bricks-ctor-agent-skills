@@ -1,6 +1,6 @@
 # BRICKS CTOR Agent Skills
 
-Official plugins for the [CTOR](https://bricks.tools) desktop agent, maintained by the BRICKS team.
+Official plugins for the [CTOR](https://ctor.bricks.tools) desktop agent, maintained by the BRICKS team.
 
 **Built into CTOR starting with v2.25** — this marketplace ships with the app: it appears at the
 bottom of the **Plugins** panel with a "Built-in" badge and refreshes automatically, so new plugins
