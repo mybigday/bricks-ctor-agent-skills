@@ -28,7 +28,9 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const NAME_RE = /^[A-Za-z0-9][A-Za-z0-9_-]*$/
 const RESERVED_SKILLS = new Set([
   // CTOR bundled skills + CLI-embedded project skills — install-blocked names.
-  'bricks-cli', 'template-creator', 'browser', 'skill-creator', 'brainstorming',
+  // `template-creator` used to be bundled; it ships from this repo now (older
+  // CTOR builds still bundle it, and skip the plugin copy on install).
+  'bricks-cli', 'browser', 'skill-creator', 'brainstorming',
   'imagegen', 'bricks-ctor', 'bricks-design', 'bricks-ux', 'rive-marketplace',
 ])
 const UNSUPPORTED_FIELDS = [

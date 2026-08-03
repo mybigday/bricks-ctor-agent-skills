@@ -1,0 +1,11 @@
+{
+  "name": "app-templates",
+  "displayName": "App Templates",
+  "version": "0.1.0",
+  "description": "Turn an existing app into a reusable prompt template — a short requirement list that captures its design, state, and data flow so you can rebuild or remix it.",
+  "author": { "name": "BRICKS", "url": "https://bricks.tools" },
+  "homepage": "https://github.com/mybigday/bricks-ctor-agent-skills",
+  "repository": "https://github.com/mybigday/bricks-ctor-agent-skills",
+  "license": "MIT",
+  "keywords": ["template", "prompt", "reuse", "design", "requirements", "scaffold"]
+}
