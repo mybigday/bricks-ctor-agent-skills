@@ -64,6 +64,19 @@ The optional Blender MCP server additionally needs [uv](https://docs.astral.sh/u
 [BlenderMCP addon](https://github.com/ahujasid/blender-mcp); it is version-pinned and stays
 disabled unless you approve its exact command at install time.
 
+## App Templates
+
+Reuse an app you already built. The agent reads the project — layout, colors, typography, state
+shape, data flow, edge cases — and writes it back as a short list of plain-language requirements
+you can paste as a prompt to rebuild or remix it.
+
+| Skill | What it does |
+|---|---|
+| `template-creator` | Distill a project into a 5-10 item prompt template and save it as `template.md` |
+
+Formerly a built-in CTOR skill. Older CTOR builds still bundle it and will skip the plugin copy at
+install time — nothing breaks either way.
+
 ## Compatibility & trust
 
 - Built into CTOR desktop from v2.25; earlier versions with the plugin system can add it manually

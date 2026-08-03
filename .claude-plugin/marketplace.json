@@ -1,7 +1,7 @@
 {
   "name": "bricks-ctor-agent-skills",
   "owner": { "name": "BRICKS", "email": "support@bricks.tools" },
-  "description": "Official CTOR plugins from the BRICKS team — document import workflows, AI feature guidance, and 3D content pipelines.",
+  "description": "Official CTOR plugins from the BRICKS team — document import workflows, AI feature guidance, 3D content pipelines, and reusable app templates.",
   "plugins": [
     {
       "name": "document-essentials",
@@ -26,6 +26,14 @@
       "description": "Model in Blender, export glTF, compose scenes in the Scene3D brick, script interactions, and ship 3D demos or mini-games to devices.",
       "version": "0.1.0",
       "category": "3d"
+    },
+    {
+      "name": "app-templates",
+      "source": "./plugins/app-templates",
+      "displayName": "App Templates",
+      "description": "Turn an existing app into a reusable prompt template — a short requirement list that captures its design, state, and data flow so you can rebuild or remix it.",
+      "version": "0.1.0",
+      "category": "productivity"
     }
   ]
 }
