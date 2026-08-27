@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- **device-telemetry 0.1.0** — new plugin with the `bricks-telemetry` skill, moved out of
+  the bricks-cli project-skill bundle (never released there) because Activity Log access
+  is not something every user has or needs. Fault diagnosis, behaviour analysis, and
+  screen reconstruction from `bricks device metrics` + `bricks activity-log`, with the
+  `al-report.mjs` baseline HTML report builder.
 - **app-templates 0.1.0** — new plugin with the `template-creator` skill, moved out of
   the CTOR desktop bundle so it can ship and update independently. CTOR builds that still
   bundle the skill skip the plugin copy at install time.

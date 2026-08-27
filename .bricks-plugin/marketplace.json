@@ -34,6 +34,14 @@
       "description": "Turn an existing app into a reusable prompt template — a short requirement list that captures its design, state, and data flow so you can rebuild or remix it.",
       "version": "0.1.0",
       "category": "productivity"
+    },
+    {
+      "name": "device-telemetry",
+      "source": "./plugins/device-telemetry",
+      "displayName": "Device Telemetry",
+      "description": "Diagnose device faults and analyse real user behaviour from device metrics and Activity Log — timelines, funnels, screenshot history, and self-contained HTML reports.",
+      "version": "0.1.0",
+      "category": "operations"
     }
   ]
 }

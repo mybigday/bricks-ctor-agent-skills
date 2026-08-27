@@ -77,6 +77,21 @@ you can paste as a prompt to rebuild or remix it.
 Formerly a built-in CTOR skill. Older CTOR builds still bundle it and will skip the plugin copy at
 install time — nothing breaks either way.
 
+## Device Telemetry
+
+Find out what actually happened on real devices. The agent pulls `bricks device metrics` (uptime
+heartbeat, memory, disk) and `bricks activity-log` (runtime events, plus screenshot history when
+enabled), joins them to the app config, and delivers a self-contained HTML report — for fault
+diagnosis, user-behaviour analysis, minute-by-minute screen reconstruction, and custom questions
+answered from the raw event stream. Filter-first query rules keep pulls cheap.
+
+| Skill | What it does |
+|---|---|
+| `bricks-telemetry` | Investigate device faults, usage, and screen history from metrics + Activity Log |
+
+Requirements: `bricks` CLI logged into the workspace; reading Activity Log usually needs OAuth
+credentials (`bricks auth login`) rather than a workspace token.
+
 ## Compatibility & trust
 
 - Built into CTOR desktop from v2.25; earlier versions with the plugin system can add it manually

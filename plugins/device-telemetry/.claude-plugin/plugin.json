@@ -1,0 +1,11 @@
+{
+  "name": "device-telemetry",
+  "displayName": "Device Telemetry",
+  "version": "0.1.0",
+  "description": "Investigate what real devices and their users actually did — fault diagnosis, behaviour analysis, and screen reconstruction from device metrics and Activity Log, delivered as self-contained HTML reports.",
+  "author": { "name": "BRICKS", "url": "https://bricks.tools" },
+  "homepage": "https://github.com/mybigday/bricks-ctor-agent-skills",
+  "repository": "https://github.com/mybigday/bricks-ctor-agent-skills",
+  "license": "MIT",
+  "keywords": ["telemetry", "activity-log", "device-metrics", "diagnostics", "analytics", "screenshots", "reporting", "fleet"]
+}
