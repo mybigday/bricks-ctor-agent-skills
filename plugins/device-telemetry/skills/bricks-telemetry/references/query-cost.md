@@ -37,9 +37,27 @@ Order of leverage:
    canvas, brick, or generator matters.
 5. **Time range** — always the last thing you widen.
 
-`--limit` is **not** in that list. It caps what gets printed, not what the server scans: an 8-day
-unfiltered query with `--limit 3` still ran past two minutes. Use it to keep a probe's output small,
-never to make an expensive query cheap.
+**`--limit` behaves differently depending on your CLI version, and the difference is large.**
+
+Run `bricks al events --help`. If it lists **`--offset`**, limits are applied *server-side*: the
+backend stops before serializing, so a limit is a real cost control. If there is no `--offset`, the
+limit is client-side only — every row in the window is still matched, serialized and streamed before
+the first one is discarded.
+
+Measured on one 5-minute window holding 36k events, asking for 100:
+
+| | Wall clock | Bytes |
+|---|---|---|
+| client-side limit (older CLI) | 9.51 s | 8 MB |
+| server-side limit | **2.01 s** | 0.02 MB |
+
+So on a current CLI, `--limit` belongs in the filter list above and is worth reaching for. On an
+older one it keeps your *output* small while costing the server exactly as much — an 8-day
+unfiltered query with `--limit 3` still ran past two minutes.
+
+Either way a limit is not a substitute for `--device` and a tight window: it truncates rather than
+selects, and on a newest-first stream it hands you the newest N events, not a representative sample.
+`--offset` pages through the rest when you need them.
 
 `--start-time` is required. Both bounds accept ISO 8601 or a relative shorthand (`30m`, `2h`, `3d`,
 `1w`) interpreted as "ago".
@@ -146,6 +164,46 @@ bricks al events --device <id> \
   timestamp, so line 1 of your JSONL is the *end* of the window and `head` shows you the latest
   events, not the earliest. Sort before you reason about sequence — `scripts/al-report.mjs` does.
   The `al screenshots` table numbers `#1` as the newest capture for the same reason.
+
+## Execution timeouts kill the pull from outside
+
+`bricks al events` sets **no request timeout of its own** — it waits as long as the server takes. So a
+timeout never comes from the CLI; it comes from whatever is running it. In CTOR Desktop that is the
+Bash tool, which defaults to **30 s**, is capped at **5 minutes**, and exposes the limit as a
+`timeout` parameter in milliseconds. Raise it before any bulk pull instead of discovering the default
+the hard way.
+
+Thirty seconds sits inside the natural spread of a dense window, which is the whole problem:
+
+| | Wall clock |
+|---|---|
+| CLI process start | 78 ms |
+| + auth / first round trip | ~0.7 s |
+| 5-min window, 18 rows returned | 1.3 – 1.9 s |
+| 5-min window, **35,959 rows** | **5.4 / 7.6 / 10.7 / 12.0 s** (four identical runs) |
+
+Two things in that table. **Cost tracks the window scanned, not the rows returned** — filtering 500
+results out of a dense five minutes still pays for the five minutes, unless a server-side `--limit`
+stops the scan early. And **identical queries vary by more than 2x**, so a pull that finishes in 12 s today
+can cross 30 s under load. That is why this shows up as "it times out sometimes" rather than as a
+clean reproduction, and why the fix is a longer timeout rather than a faster query.
+
+### The silent part
+
+`--jsonl` writes one line as each result arrives, so a pull killed at the timeout leaves a **valid but
+incomplete** file. Every line parses, nothing reports an error, and every number computed from it is
+quietly wrong.
+
+Results arrive **newest-first**, so truncation costs you the *oldest* end of the window: the last line
+should sit near your `--start-time`. Check it before analysing.
+
+```bash
+# oldest event actually captured -- should be close to --start-time
+tail -1 events.jsonl | python3 -c 'import json,sys; print(json.loads(sys.stdin.read())["timestamp"])'
+```
+
+If it stops well short, you were cut off. Re-run with a longer timeout, or split the window, before
+trusting anything downstream.
 
 ## Stop conditions
 
