@@ -13,7 +13,8 @@ the people standing in front of it did.
 ## If you read nothing else
 
 1. Always pass `--device`. An unfiltered 8-day pull is 148 s and 280 MB; the same window filtered is
-   4.2 s and 703 KB. `--limit` does not help.
+   4.2 s and 703 KB. Add `--limit` too when your CLI applies it server-side (it does if
+   `bricks al events --help` lists `--offset`); on older builds it caps output only.
 2. Redirect to a file (`> events.jsonl`), never pipe — piping truncates at 64 KB.
 3. Join the app config, or your report is full of uuids nobody can read.
 4. Deliver an HTML file inside the project, and make sure the user can actually open it.
@@ -55,9 +56,13 @@ workspaces:
 | 1 day, one `--device` | 2.5 s | 142 | 60 KB |
 | 3 days, one `--device` + `--event-name CANVAS_ENTER` | 5.0 s | 2,396 | 779 KB |
 
-`--limit` is an **output cap only**. An 8-day unfiltered query with `--limit 3` still took over two
-minutes, because the server scans the range either way. Always narrow with `--device` first, then
-`--event-name` / `--type` / `--subspace` / `--sender`, and only then widen the window.
+**`--limit` depends on your CLI version.** Where it is applied server-side — check for `--offset` in
+`bricks al events --help` — it stops the scan early and is a genuine cost control: 100 rows out of a
+36k-event window took 2.01 s instead of 9.51 s. On older builds it caps output only, and an 8-day
+unfiltered query with `--limit 3` still took over two minutes. Either way it truncates rather than
+samples, so narrow with `--device` first, then `--event-name` / `--type` / `--subspace` / `--sender`,
+and only then widen the window. See
+[Query cost & filters](references/query-cost.md).
 
 Never load raw events into your context. Stream them to a file with `--jsonl` and analyse the file.
 
