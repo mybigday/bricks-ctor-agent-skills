@@ -1,6 +1,7 @@
 ---
 name: bricks-telemetry
 description: Analyse what real BRICKS devices and their users actually did, from `bricks device metrics` (uptime heartbeat, memory, disk) and `bricks activity-log` (every runtime event, plus screenshot history when enabled). Use for fault diagnosis (freeze, restart, wrong screen, failed payment or print), operator and end-user behaviour analysis (which bricks get pressed, dwell per screen, funnels and drop-off, sessions, busy hours, attended vs unattended), screen monitoring and state reconstruction (what was on screen minute by minute, with or without screenshots), fleet and usage reporting, and custom questions answered from the raw event stream. Also covers the query-cost rules that keep a pull from becoming a multi-hundred-megabyte download. Triggers on device troubleshooting, "why did the device do X", crash or freeze reports, uptime or memory questions, user/usage/engagement analysis, tap or touch analysis, session replay, screenshot history, activity log queries, or any request for a device report.
+license: MIT
 ---
 
 # BRICKS Telemetry
@@ -17,8 +18,10 @@ the people standing in front of it did.
 3. Join the app config, or your report is full of uuids nobody can read.
 4. Deliver an HTML file inside the project, and make sure the user can actually open it.
 5. Camera and video regions are blank in every capture. That is the capture path, not a fault.
+6. Raise the command timeout before a bulk pull. The CLI has none of its own; the runner kills it at
+   30 s by default and leaves a valid-looking, incomplete file.
 
-The reference files carry the detail; these five are what go wrong without them.
+The reference files carry the detail; these six are what go wrong without them.
 
 ## What this data can answer
 
@@ -143,6 +146,14 @@ the report tool accepts repeated `--events` files, and `--filtered` tells it the
 slice so it does not read the mix as a noise profile. The CLI refuses ranges wider than 30 days — a
 client-side guard, not a server limit, so step through consecutive windows rather than trying to
 defeat it.
+
+**Give this command a longer timeout than the default.** `bricks al` sets no timeout of its own, so
+the pull runs until the *runner* kills it — 30 s in CTOR Desktop's Bash tool, which its `timeout`
+parameter raises to 5 minutes. A dense five-minute window measured 5.4–12.0 s across identical runs,
+so the default is close enough to bite intermittently. A killed `--jsonl` pull leaves a file that
+parses cleanly and is simply missing its oldest events, so confirm the last line reaches your
+`--start-time` before analysing — see
+[Query cost & filters](references/query-cost.md#execution-timeouts-kill-the-pull-from-outside).
 
 For a behaviour question you usually want the opposite of everything: pull only the interaction
 events, which is both cheaper and cleaner. See

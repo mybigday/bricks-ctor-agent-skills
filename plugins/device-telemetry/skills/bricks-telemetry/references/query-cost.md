@@ -147,6 +147,46 @@ bricks al events --device <id> \
   events, not the earliest. Sort before you reason about sequence — `scripts/al-report.mjs` does.
   The `al screenshots` table numbers `#1` as the newest capture for the same reason.
 
+## Execution timeouts kill the pull from outside
+
+`bricks al events` sets **no request timeout of its own** — it waits as long as the server takes. So a
+timeout never comes from the CLI; it comes from whatever is running it. In CTOR Desktop that is the
+Bash tool, which defaults to **30 s**, is capped at **5 minutes**, and exposes the limit as a
+`timeout` parameter in milliseconds. Raise it before any bulk pull instead of discovering the default
+the hard way.
+
+Thirty seconds sits inside the natural spread of a dense window, which is the whole problem:
+
+| | Wall clock |
+|---|---|
+| CLI process start | 78 ms |
+| + auth / first round trip | ~0.7 s |
+| 5-min window, 18 rows returned | 1.3 – 1.9 s |
+| 5-min window, **35,959 rows** | **5.4 / 7.6 / 10.7 / 12.0 s** (four identical runs) |
+
+Two things in that table. **Cost tracks the window scanned, not the rows returned** — filtering 500
+results out of a dense five minutes still pays for the five minutes, the same reason `--limit` is not
+a cost control. And **identical queries vary by more than 2x**, so a pull that finishes in 12 s today
+can cross 30 s under load. That is why this shows up as "it times out sometimes" rather than as a
+clean reproduction, and why the fix is a longer timeout rather than a faster query.
+
+### The silent part
+
+`--jsonl` writes one line as each result arrives, so a pull killed at the timeout leaves a **valid but
+incomplete** file. Every line parses, nothing reports an error, and every number computed from it is
+quietly wrong.
+
+Results arrive **newest-first**, so truncation costs you the *oldest* end of the window: the last line
+should sit near your `--start-time`. Check it before analysing.
+
+```bash
+# oldest event actually captured -- should be close to --start-time
+tail -1 events.jsonl | python3 -c 'import json,sys; print(json.loads(sys.stdin.read())["timestamp"])'
+```
+
+If it stops well short, you were cut off. Re-run with a longer timeout, or split the window, before
+trusting anything downstream.
+
 ## Stop conditions
 
 Stop and narrow — do not retry the same shape — when a query runs past ~30 s, when the output file
